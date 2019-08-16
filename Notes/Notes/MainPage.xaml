@@ -13,7 +13,7 @@
         <Editor x:Name="editor"
                 Placeholder="Entre com suas anotações..."
                 HeightRequest="600" 
-                Opacity="1"/>
+                Opacity="0"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -26,7 +26,7 @@
                     BackgroundColor="Green"
                     BorderRadius="10"
                     Clicked="OnSaveButtonClicked" 
-                    Opacity="1"/>
+                    Opacity="0"/>
             
             <Button Grid.Column="1"
                     x:Name="cancelar"
@@ -35,7 +35,7 @@
                     BorderRadius="10"
                     Text="Apagar"
                     Clicked="OnDeleteButtonClicked"
-                    Opacity="1"/>
+                    Opacity="0"/>
             
         </Grid>
     </StackLayout>
