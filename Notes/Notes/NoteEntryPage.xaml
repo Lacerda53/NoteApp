@@ -1,25 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Notes.MainPage">
-    <StackLayout Margin="10,35,10,10">
-        
-        <Label Text="NotesApp"
-               x:Name="notes"
-               HorizontalOptions="Center"
-               FontAttributes="Bold" 
-               FontSize="Title"/>
-        
-        <Editor x:Name="editor"
-                Placeholder="Entre com suas anotações..."
-                HeightRequest="600" 
-                Opacity="0"/>
+             x:Class="Notes.NoteEntryPage"
+             Title="Note Entry">
+    <StackLayout Margin="20">
+        <Editor Placeholder="Entre com suas anotações..."
+                x:Name="editor"
+                Text="{Binding Text}"
+                HeightRequest="100" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
             <Button Text="Salvar"
                     x:Name="salvar"
                     TextColor="White"
@@ -27,7 +20,7 @@
                     BorderRadius="10"
                     Clicked="OnSaveButtonClicked" 
                     Opacity="0"/>
-            
+
             <Button Grid.Column="1"
                     x:Name="cancelar"
                     BackgroundColor="Crimson"
@@ -36,7 +29,6 @@
                     Text="Apagar"
                     Clicked="OnDeleteButtonClicked"
                     Opacity="0"/>
-            
         </Grid>
     </StackLayout>
 </ContentPage>

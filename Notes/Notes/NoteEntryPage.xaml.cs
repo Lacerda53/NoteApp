@@ -1,27 +1,23 @@
 ﻿using System;
 using System.IO;
 using Xamarin.Forms;
+using Notes.Models;
 
 namespace Notes
 {
-    public partial class MainPage : ContentPage
+    public partial class NoteEntryPage : ContentPage
     {
-        public string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
-
-        public MainPage()
+        public NoteEntryPage()
         {
             InitializeComponent();
             Animation();
-
-            if (File.Exists(_fileName))
-            {
-                editor.Text = File.ReadAllText(_fileName);
-            }
         }
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(editor.Text))
+            var note = (Note)BindingContext;
+
+            if (string.IsNullOrWhiteSpace(note.Filename))
             {
                 uint timeout = 50;
                 await editor.TranslateTo(-15, 0, timeout);
@@ -32,25 +28,31 @@ namespace Notes
                 await editor.TranslateTo(5, 0, timeout);
                 editor.TranslationX = 0;
                 await DisplayAlert("Ops", "Nenhuma anotação foi feita", "OK");
+                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
+                File.WriteAllText(filename, note.Text);
             }
             else
             {
-                File.WriteAllText(_fileName, editor.Text);
-                await DisplayAlert("Anotado", "Suas anotações foram salvas", "OK");
+                // Update
+                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
+                File.WriteAllText(note.Filename, note.Text);
+                await Navigation.PopAsync();
             }
 
         }
 
-        void OnDeleteButtonClicked(object sender, EventArgs e)
+        async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
-            if (File.Exists(_fileName))
-            {
-                File.Delete(_fileName);
-                DisplayAlert("Apagado", "Suas anotações foram apagadas", "OK");
-            }
-            editor.Text = string.Empty;
-        }
+            var note = (Note)BindingContext;
 
+            if (File.Exists(note.Filename))
+            {
+                File.Delete(note.Filename);
+                await DisplayAlert("Apagado", "Suas anotações foram apagadas", "OK");
+            }
+
+            await Navigation.PopAsync();
+        }
         public async void Animation()
         {
             await editor.FadeTo(1, 1000, Easing.SinInOut);
