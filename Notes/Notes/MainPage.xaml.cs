@@ -11,6 +11,7 @@ namespace Notes
         public MainPage()
         {
             InitializeComponent();
+            //Animation();
 
             if (File.Exists(_fileName))
             {
@@ -20,9 +21,16 @@ namespace Notes
 
         void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            File.WriteAllText(_fileName, editor.Text);
-            DisplayAlert("Anotado","Suas anotações foram salvas","OK");
-       
+            if (string.IsNullOrEmpty(editor.Text))
+            {
+                DisplayAlert("Ops", "Nenhuma anotação foi feita", "OK");
+            }
+            else
+            {
+                File.WriteAllText(_fileName, editor.Text);
+                DisplayAlert("Anotado", "Suas anotações foram salvas", "OK");
+            }
+
         }
 
         void OnDeleteButtonClicked(object sender, EventArgs e)
@@ -33,6 +41,13 @@ namespace Notes
                 DisplayAlert("Apagado", "Suas anotações foram apagadas", "OK");
             }
             editor.Text = string.Empty;
+        }
+
+        public async void Animation()
+        {
+            await editor.FadeTo(1, 1000, Easing.SinInOut);
+            await salvar.FadeTo(1, 1000, Easing.BounceIn);
+            await cancelar.FadeTo(1, 1000, Easing.BounceIn);
         }
     }
 }

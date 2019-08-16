@@ -4,14 +4,16 @@
              x:Class="Notes.MainPage">
     <StackLayout Margin="10,35,10,10">
         
-        <Label Text="Notes"
+        <Label Text="NotesApp"
+               x:Name="notes"
                HorizontalOptions="Center"
                FontAttributes="Bold" 
                FontSize="Title"/>
         
         <Editor x:Name="editor"
                 Placeholder="Entre com suas anotações..."
-                HeightRequest="600" />
+                HeightRequest="600" 
+                Opacity="1"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -19,17 +21,21 @@
             </Grid.ColumnDefinitions>
             
             <Button Text="Salvar"
+                    x:Name="salvar"
                     TextColor="White"
                     BackgroundColor="Green"
                     BorderRadius="10"
-                    Clicked="OnSaveButtonClicked" />
+                    Clicked="OnSaveButtonClicked" 
+                    Opacity="1"/>
             
             <Button Grid.Column="1"
-                    BackgroundColor="Red"
+                    x:Name="cancelar"
+                    BackgroundColor="Crimson"
                     TextColor="White"
                     BorderRadius="10"
                     Text="Apagar"
-                    Clicked="OnDeleteButtonClicked"/>
+                    Clicked="OnDeleteButtonClicked"
+                    Opacity="1"/>
             
         </Grid>
     </StackLayout>

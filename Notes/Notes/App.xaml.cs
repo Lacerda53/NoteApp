@@ -13,6 +13,7 @@ namespace Notes
 #if DEBUG
             HotReloader.Current.Run(this);
 #endif
+            
             MainPage = new MainPage();
         }
 
