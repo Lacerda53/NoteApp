@@ -19,8 +19,8 @@ namespace Notes
             base.OnAppearing();
 
             var notes = new List<Note>();
-
             var files = Directory.EnumerateFiles(App.FolderPath, "*.notes.txt");
+
             foreach (var filename in files)
             {
                 notes.Add(new Note
@@ -29,7 +29,6 @@ namespace Notes
                     Text = File.ReadAllText(filename),
                     Date = File.GetCreationTime(filename)
                 });
-
             }
 
             listView.ItemsSource = notes

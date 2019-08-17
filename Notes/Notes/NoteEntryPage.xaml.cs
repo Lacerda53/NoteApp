@@ -19,6 +19,11 @@ namespace Notes
 
             if (string.IsNullOrWhiteSpace(note.Filename))
             {
+                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
+                File.WriteAllText(filename, note.Text);
+            }
+            if (string.IsNullOrEmpty(editor.Text))
+            {
                 uint timeout = 50;
                 await editor.TranslateTo(-15, 0, timeout);
                 await editor.TranslateTo(15, 0, timeout);
@@ -28,16 +33,12 @@ namespace Notes
                 await editor.TranslateTo(5, 0, timeout);
                 editor.TranslationX = 0;
                 await DisplayAlert("Ops", "Nenhuma anotação foi feita", "OK");
-                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
-                File.WriteAllText(filename, note.Text);
             }
-            else
+            if (!string.IsNullOrWhiteSpace(note.Filename))
             {
-                // Update
-                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
                 File.WriteAllText(note.Filename, note.Text);
-                await Navigation.PopAsync();
             }
+            await Navigation.PopAsync();
 
         }
 
@@ -55,9 +56,9 @@ namespace Notes
         }
         public async void Animation()
         {
-            await editor.FadeTo(1, 1000, Easing.SinInOut);
-            await salvar.FadeTo(1, 1000, Easing.BounceIn);
-            await cancelar.FadeTo(1, 1000, Easing.BounceIn);
+            await editor.FadeTo(1, 500, Easing.Linear);
+            await salvar.FadeTo(1, 300, Easing.Linear);
+            await cancelar.FadeTo(1, 300, Easing.Linear);
         }
     }
 }

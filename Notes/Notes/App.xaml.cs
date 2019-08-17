@@ -17,7 +17,7 @@ namespace Notes
             HotReloader.Current.Run(this);
 #endif
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            MainPage = new NavigationPage(new NotesPage());
+            MainPage = new NavigationPage(new SplashPage());
         }
 
         protected override void OnStart()

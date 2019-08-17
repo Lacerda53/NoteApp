@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.NoteEntryPage"
-             Title="Note Entry">
+             Title="Editor">
     <StackLayout Margin="20">
         <Editor Placeholder="Entre com suas anotações..."
                 x:Name="editor"
                 Text="{Binding Text}"
-                HeightRequest="100" />
+                HeightRequest="600" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -15,16 +15,18 @@
             </Grid.ColumnDefinitions>
             <Button Text="Salvar"
                     x:Name="salvar"
-                    TextColor="White"
-                    BackgroundColor="Green"
+                    TextColor="Orange"
+                    BackgroundColor="Purple"
                     BorderRadius="10"
                     Clicked="OnSaveButtonClicked" 
                     Opacity="0"/>
 
             <Button Grid.Column="1"
                     x:Name="cancelar"
-                    BackgroundColor="Crimson"
-                    TextColor="White"
+                    BorderColor="Orange"
+                    BackgroundColor="Transparent"
+                    BorderWidth="3"
+                    TextColor="Purple"
                     BorderRadius="10"
                     Text="Apagar"
                     Clicked="OnDeleteButtonClicked"
