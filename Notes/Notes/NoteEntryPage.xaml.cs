@@ -10,9 +10,15 @@ namespace Notes
         public NoteEntryPage()
         {
             InitializeComponent();
-            Animation();
         }
 
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await editor.FadeTo(1, 500, Easing.Linear);
+            await salvar.FadeTo(1, 300, Easing.Linear);
+            await cancelar.FadeTo(1, 300, Easing.Linear);
+        }
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var note = (Note)BindingContext;
@@ -53,12 +59,6 @@ namespace Notes
             }
 
             await Navigation.PopAsync();
-        }
-        public async void Animation()
-        {
-            await editor.FadeTo(1, 500, Easing.Linear);
-            await salvar.FadeTo(1, 300, Easing.Linear);
-            await cancelar.FadeTo(1, 300, Easing.Linear);
         }
     }
 }
